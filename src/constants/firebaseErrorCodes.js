@@ -1,0 +1,4 @@
+
+const AuthErrorCodes = Object.freeze({
+
+});

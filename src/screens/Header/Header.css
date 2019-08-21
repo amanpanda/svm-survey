@@ -1,0 +1,16 @@
+.header-container {
+  width: 100%;
+  background-color: #025697;
+  display: flex;
+  position: relative;
+}
+
+.title-text {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 50px;
+  font-weight: 100;
+}
