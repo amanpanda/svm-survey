@@ -25,8 +25,8 @@ export const ViewTypeInfo = Object.freeze({
     Header: 'Create a new survey:',
     SubmitButtonText: 'Create',
     Instructions: 'Define the questions for a new survey. While you will be able\
-      to edit these later, please be mindful to input questions properly to avoid\
-      data inconsistency.',
+      to edit these later, please be mindful to input questions properly as editing\
+      can lead to data inconsistency.',
   },
 });
 

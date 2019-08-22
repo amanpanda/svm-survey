@@ -1,13 +1,10 @@
 import {
   compose,
   setDisplayName,
-  mapProps,
-  lifecycle,
-  withProps,
   withHandlers,
   withStateHandlers,
+  withProps,
 } from 'recompose';
-import _ from 'lodash';
 import CreateSurveyPresenter from './CreateSurveyPresenter';
 import { ViewType, QuestionTypes } from 'constants/survey';
 
@@ -107,5 +104,13 @@ export default compose(
       };
     },
   }),
+  withProps(({ surveyData }) => {
+    let disablePublish = false;
+    const { questions } = surveyData;
+    if (questions.length < 1 || questions[0].questionStatement === '') {
+      disablePublish = true
+    }
+    return { disablePublish };
+  })
 )(CreateSurveyPresenter);
   

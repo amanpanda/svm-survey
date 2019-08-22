@@ -16,27 +16,40 @@ const MultipleChoice = (props) => {
     editMultChoiceOption,
   } = props;
   return (
-    <div>
-      <div>
-        <h1>Question {idx + 1}</h1>
+    <div className='question-wrapper'>
+      <div className='question-header'>
+        <p className='question-title'>Question {idx + 1}</p>
         <Button
           ghost
           type="danger"
           shape="round" 
           icon="delete"
           onClick={() => deleteQuestion(idx)}
-        >
-          Delete
-        </Button>
+          className='delete-question'
+        />
       </div>
-      <Input
-        placeholder="What is your question?"
-        value={questionStatement}
-        onChange={e => editQuestionStatement(e, idx)}
-      />
-      <div>
+      <div className='survey-section-wrapper'>
+        <Input
+          placeholder="What is your question?"
+          value={questionStatement}
+          onChange={e => editQuestionStatement(e, idx)}
+        />
+      </div>
+      <div className='survey-section-wrapper'>
+        <Button
+          shape="circle"
+          icon="plus"
+          onClick={() => answerChoices.length < 10 ? addMultChoiceOption(idx) : null}
+        />
+        <Button
+          shape="circle"
+          icon="minus"
+          onClick={() => answerChoices.length > 2 ? removeMultChoiceOption(idx) : null}
+        />
+      </div>
+      <div className='survey-section-wrapper'>
         {_.map(answerChoices, (ac, acIdx) => (
-          <div key={acIdx}>
+          <div key={acIdx} className='mcq-option'>
             <Input
               placeholder="Write a possible answer choice here."
               value={ac}
@@ -45,16 +58,6 @@ const MultipleChoice = (props) => {
           </div>
         ))}
       </div>
-      <Button
-        shape="circle"
-        icon="plus"
-        onClick={() => answerChoices.length < 10 ? addMultChoiceOption(idx) : null}
-      />
-      <Button
-        shape="circle"
-        icon="minus"
-        onClick={() => answerChoices.length > 2 ? removeMultChoiceOption(idx) : null}
-      />
     </div>
   );
 };

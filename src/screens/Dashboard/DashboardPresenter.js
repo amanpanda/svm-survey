@@ -2,7 +2,6 @@ import React from 'react';
 import './Dashboard.css';
 import { Header } from '../';
 import { Button, Modal } from 'antd';
-import { auth } from 'utilities/firebase';
 import { CreateSurvey } from 'features';
 import { ViewType } from 'constants/survey';
 
@@ -21,15 +20,11 @@ const DashboardPresenter = (props) => {
          <Modal
           title="Create a New Survey"
           visible={showModal}
-          confirmLoading={submitting}
           onCancel={() => setShowModal(false)}
-          footer={[
-            <Button key="close" onClick={() => setShowModal(false)}>
-              Cancel
-            </Button>,
-          ]}
+          footer={[]}
         >
           <CreateSurvey 
+            {...{ submitting }}
             view={ViewType.CREATE}
             onSubmit={(surveyData) => submitNewSurvey(surveyData)}
           />

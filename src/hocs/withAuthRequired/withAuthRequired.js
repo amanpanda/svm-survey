@@ -1,4 +1,3 @@
-import React from 'react';
 import { compose, lifecycle } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { auth } from 'utilities/firebase';
