@@ -27,8 +27,7 @@ export default compose(
           const res = await auth.signInWithEmailAndPassword(username, password);
           setDisableLogIn(false);
           history.push('/Dashboard');
-        } catch (err) {
-          const { code } = err;
+        } catch (error) {
           setDisableLogIn(false);
           setError("Could not log in. Your username and password combination was incorrect.")
         } 

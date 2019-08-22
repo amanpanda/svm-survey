@@ -8,7 +8,6 @@ import {
   Dashboard,
   LogIn,
   Users,
-  SideBar
 } from './';
 
 const App = () => {
