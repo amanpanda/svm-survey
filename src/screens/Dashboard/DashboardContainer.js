@@ -18,8 +18,6 @@ import { SurveyTypes } from 'constants/survey';
 
 import DashboardPresenter from './DashboardPresenter';
 
-let surveysListener = null;
-
 export default compose(
   setDisplayName('DashboardPresenter'),
   withSideBar,
@@ -35,18 +33,16 @@ export default compose(
         setSurveyList,
         setLoading,
       } = this.props;
-      if (!surveysListener) {
-        this.surveysListener = await firestore.collection('surveys').onSnapshot(qs => {
-          setLoading(true);
-          const surveyList = _.map(qs.docs, (doc, key) => ({ 
-            ...doc.data(),
-            key,
-            documentId: doc.id,
-          }));
-          setSurveyList(surveyList);
-          setLoading(false);
-        });
-      }
+      this.surveysListener = await firestore.collection('surveys').onSnapshot(qs => {
+        setLoading(true);
+        const surveyList = _.map(qs.docs, (doc, key) => ({ 
+          ...doc.data(),
+          key,
+          documentId: doc.id,
+        }));
+        setSurveyList(surveyList);
+        setLoading(false);
+      });
     },
     componentWillUnmount () {
       this.surveysListener();
@@ -86,5 +82,5 @@ export default compose(
       }
     },
   }),
-  withSurvey,
+  withSurvey(),
 )(DashboardPresenter);

@@ -1,9 +1,9 @@
 import React from 'react';
+import _ from 'lodash';
 import {
   compose,
   withState,
   mapProps,
-  withProps,
   withHandlers,
 } from 'recompose';
 import {
@@ -23,7 +23,7 @@ import { firestore } from 'utilities/firebase';
 import { ViewType, SurveyTypes } from 'constants/survey';
 import { formatTimestamp } from 'utilities/stringManipulation';
 
-const withSurvey = WrappedComponent => (props) => {
+const withSurvey = isAssetScreen => WrappedComponent => (props) => {
   const {
     showEditModal,
     setShowEditModal,
@@ -36,9 +36,9 @@ const withSurvey = WrappedComponent => (props) => {
     submitEditedSurvey,
   } = props;
 
-  const columns = [
+  let columns = [
     {
-      title: 'Survey Title',
+      title: !isAssetScreen ? 'Survey Title' : 'Subcategories',
       dataIndex: 'surveyTitle',
       key: 'surveyTitle',
       width: 250,
@@ -74,11 +74,11 @@ const withSurvey = WrappedComponent => (props) => {
         const { live } = surveyData;
         return (
           <div className='actions-wrapper'>
-            <Switch 
+            {!isAssetScreen && (<Switch 
               checked={live}
-              size="small"
+              // size="small"
               onClick={() => toggleSurveyVisibility(surveyData)}
-            />&nbsp;&nbsp;Live
+            >&nbsp;&nbsp;Live</Switch>)}
             <Popover
               placement="bottom"
               title={"Options"}
@@ -99,7 +99,7 @@ const withSurvey = WrappedComponent => (props) => {
                   >
                     Edit
                   </Button>
-                  <Popconfirm
+                  {!isAssetScreen && (<Popconfirm
                     title="Are you sure delete this survey? All submissions will also be deleted."
                     onConfirm={() => deleteSurveyData(surveyData)}
                     // onCancel={cancel}
@@ -112,7 +112,7 @@ const withSurvey = WrappedComponent => (props) => {
                     >
                       Delete
                     </Button>
-                  </Popconfirm>
+                  </Popconfirm>)}
                 </div>
               )}
             >
@@ -124,7 +124,7 @@ const withSurvey = WrappedComponent => (props) => {
                     marginLeft: 10,
                   }}
                 >
-                  More
+                  Edit
                 </Button>
             </Popover>
           </div>
@@ -133,6 +133,7 @@ const withSurvey = WrappedComponent => (props) => {
       width: 200,
     },
   ];
+  columns = _.filter(columns, c => c.title != 'Last Updated');
 
   return (
     <div>
@@ -156,7 +157,7 @@ const withSurvey = WrappedComponent => (props) => {
   )
 };
 
-const enhance = WrappedComponent => compose(
+const enhance = (isAssetScreen) => WrappedComponent => compose(
   withState('showEditModal', 'setShowEditModal', false),
   withState('editSubmitting', 'setEditSubmitting', false),
   withAlerts,
@@ -201,6 +202,7 @@ const enhance = WrappedComponent => compose(
       setError,
       setSuccess,
     }) => (surveyData) => {
+      // To do.
       console.log("Call csv build here.")
     },
     deleteSurveyData: ({
@@ -241,20 +243,37 @@ const enhance = WrappedComponent => compose(
             ...surveyData,
             lastUpdatedTimestamp: timestamp,
           });
-          setSuccess("Successfully edited survey name.");
+          setSuccess("Successfully updated survey.");
           setShowEditModal(false);
         } catch (err) {
           setError("Something went wrong while trying\
-            to edit the survey. Please try again later.")
+            to update the survey. Please try again later.")
         } finally {
-          setEditSubmitting(false)
+          setEditSubmitting(false);
         }
       } else if (surveyType === SurveyTypes.ASSET) { // To do.
-
+        const {
+          category,
+          subcategory
+        } = surveyData;
+        const toWriteId = category + ' ' + subcategory;
+        try {
+          const res = await firestore.collection('assets').doc(toWriteId).set({
+            ...surveyData,
+            lastUpdatedTimestamp: timestamp,
+          });
+          setSuccess("Successfully updated survey.");
+          setShowEditModal(false);
+        } catch (err) {
+          setError("Something went wrong while trying\
+            to update the survey. Please try again later.")
+        } finally {
+          setEditSubmitting(false);
+        }
       }
     },
   }),
-  withSurvey,
+  withSurvey(isAssetScreen),
 )(WrappedComponent);
 
 export default enhance;

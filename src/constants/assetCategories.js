@@ -2,7 +2,7 @@
 const assetCategories = {
   agriculture: {
     formattedName: 'Agriculture',
-    subCategories: [
+    subcategories: [
       'Soil Testing Lab',
       'Plant Unit/Seed Unit',
       'Agriculture Input Shops/Suppliers',
@@ -16,7 +16,7 @@ const assetCategories = {
   },
   animalHusbandry: {
     formattedName: 'Animal Husbandry',
-    subCategories: [
+    subcategories: [
       'Poultry Farm',
       'Dairy Farm/Cattle Herd',
       'Animal Rearing Farm',
@@ -26,7 +26,7 @@ const assetCategories = {
   },
   fisheries: {
     formattedName: 'Fisheries',
-    subCategories: [
+    subcategories: [
       'Community Fish Market',
       'Fish Pond',
       'Input Shop',
@@ -35,7 +35,7 @@ const assetCategories = {
   },
   panchyatiRaj: {
     formattedName: 'Panchyati Raj',
-    subCategories: [
+    subcategories: [
       'Gram Panchyat Building',
       'Community Hall',
       'Information Center',
@@ -49,7 +49,7 @@ const assetCategories = {
   },
   foodAndCivilSupplies: {
     formattedName: 'Food and Civil Supplies',
-    subCategories: [
+    subcategories: [
       'Ration Shop/Fair Price Shop',
       'Shops',
       'FCI Godown/Warehouse',
@@ -58,13 +58,13 @@ const assetCategories = {
   },
   livelihood: {
     formattedName: 'Livelihood',
-    subCategories: [
+    subcategories: [
       'SHG Office',
     ],
   },
   lodgingAndBoarding: {
     formattedName: 'Lodging and Boarding',
-    subCategories: [
+    subcategories: [
       'Homestays',
       'Hotel/Guest House/Resort',
       'Eateries',
@@ -72,7 +72,7 @@ const assetCategories = {
   },
   energyAndIct: {
     formattedName: 'Energy and Ict',
-    subCategories: [
+    subcategories: [
       'Internet Cafe',
       'Electrical Substation',
       'Renewable Energy Unit',
@@ -85,7 +85,7 @@ const assetCategories = {
   },
   education: {
     formattedName: 'Education',
-    subCategories: [
+    subcategories: [
       'Anganwadi Building',
       'Teacher Training Centers',
       'Special Schools',
@@ -99,7 +99,7 @@ const assetCategories = {
   },
   healthcare: {
     formattedName: 'Healthcare',
-    subCategories: [
+    subcategories: [
       'CHC',
       'PHC',
       'Sub Center',
@@ -111,7 +111,7 @@ const assetCategories = {
   },
   tourism: {
     formattedName: 'Tourism',
-    subCategories: [
+    subcategories: [
       'Religious Site',
       'Cultural Heritage/Historical Site',
       'Nature Related',
@@ -121,7 +121,7 @@ const assetCategories = {
   },
   handloomAndHandicraft: {
     formattedName: 'Handloom and Handicraft',
-    subCategories: [
+    subcategories: [
       'Emporium',
       'Craft Center',
       'Common Facility Center',
@@ -132,13 +132,13 @@ const assetCategories = {
   },
   security: {
     formattedName: 'Security',
-    subCategories: [
+    subcategories: [
       'Police Station',
     ],
   },
   finance: {
     formattedName: 'Finance',
-    subCategories: [
+    subcategories: [
       'Post Office',
       'Bank',
       'ATM',
@@ -147,7 +147,7 @@ const assetCategories = {
   },
   water: {
     formattedName: 'Water',
-    subCategories: [
+    subcategories: [
       'Public Taps/Public Stand Pod',
       'Bore Wells',
       'Open Wells',
