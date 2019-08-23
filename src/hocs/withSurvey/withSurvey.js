@@ -195,7 +195,7 @@ const enhance = WrappedComponent => compose(
           setError("Something went wrong while trying\
             to update the survey. Please try again later.")
         }
-      }
+      } 
     },
     exportSurveyData: ({
       setError,
@@ -249,6 +249,8 @@ const enhance = WrappedComponent => compose(
         } finally {
           setEditSubmitting(false)
         }
+      } else if (surveyType === SurveyTypes.ASSET) { // To do.
+
       }
     },
   }),

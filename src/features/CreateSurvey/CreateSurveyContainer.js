@@ -12,13 +12,11 @@ export default compose(
   setDisplayName('CreateSurveyPresenter'),
   withProps(({ view, surveyInitialData }) => {
     if (view === ViewType.EDIT && !!surveyInitialData) {
-      // console.log()
       return { surveyData: { ...surveyInitialData} };
     }
   }),
   withStateHandlers(({ view, surveyInitialData }) => {
     if (view === ViewType.EDIT) {
-      // We're editing a survey, return surveyData from firestore
       return { 
         surveyData: { ...surveyInitialData },
       };

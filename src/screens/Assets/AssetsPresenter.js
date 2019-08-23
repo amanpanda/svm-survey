@@ -6,7 +6,15 @@ const AssetsPresenter = () => {
   return (
     <div className='assets-wrapper'>
       <Header title='Assets'/>
-      This is the AssetsPresenter Component
+      <div className='assets-content'>
+        <div className='assets-container'>
+        </div>
+        <div className='view-survey-container'>
+          <div className='view-survey'>
+        
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
