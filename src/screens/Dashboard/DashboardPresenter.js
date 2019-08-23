@@ -1,23 +1,25 @@
 import React from 'react';
 import './Dashboard.css';
 import { Header } from '../';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Spin, Table } from 'antd';
 import { CreateSurvey } from 'features';
 import { ViewType } from 'constants/survey';
 
 const DashboardPresenter = (props) => {
   const {
+    loading,
     submitting,
     showModal,
     setShowModal,
     submitNewSurvey,
+    surveyList,
+    columns,
   } = props;
-
   return (
     <div className='dashboard-wrapper'>
       <Header title='Dashboard'/>
       <div className='dashboard-content'>
-         <Modal
+        <Modal
           title="Create a New Survey"
           visible={showModal}
           onCancel={() => setShowModal(false)}
@@ -43,6 +45,10 @@ const DashboardPresenter = (props) => {
         </div>
         <div className='view-survey-container'>
           <div className='view-survey'>
+            <Table
+              dataSource={surveyList}
+              {...{ loading, columns }}
+            />
           </div>
         </div>
       </div>

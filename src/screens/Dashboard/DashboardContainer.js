@@ -3,21 +3,55 @@ import {
   setDisplayName,
   withState,
   withHandlers,
+  withStateHandlers,
+  lifecycle,
 } from 'recompose';
+import _ from 'lodash';
 import {
   withSideBar,
   withAuthRequired,
   withAlerts,
+  withSurvey,
 } from 'hocs';
 import { firestore } from 'utilities/firebase';
+import { SurveyTypes } from 'constants/survey';
 
 import DashboardPresenter from './DashboardPresenter';
+
+let surveysListener = null;
 
 export default compose(
   setDisplayName('DashboardPresenter'),
   withSideBar,
   withAuthRequired,
   withAlerts,
+  withState('loading', 'setLoading', true),
+  withStateHandlers(() => ({ surveyList: [] }), {
+    setSurveyList: () => surveyList => ({ surveyList }),
+  }),
+  lifecycle({
+    async componentDidMount() {
+      const {
+        setSurveyList,
+        setLoading,
+      } = this.props;
+      if (!surveysListener) {
+        this.surveysListener = await firestore.collection('surveys').onSnapshot(qs => {
+          setLoading(true);
+          const surveyList = _.map(qs.docs, (doc, key) => ({ 
+            ...doc.data(),
+            key,
+            documentId: doc.id,
+          }));
+          setSurveyList(surveyList);
+          setLoading(false);
+        });
+      }
+    },
+    componentWillUnmount () {
+      this.surveysListener();
+    },
+  }),
   withState('submitting', 'setSubmitting', false),
   withState('showModal', 'setShowModal', false),
   withHandlers({
@@ -34,7 +68,9 @@ export default compose(
         numberOfSubmissions: 0,
         createdAtTimestamp: timestamp,
         lastUpdatedTimestamp: timestamp,
-        lastSubmissionTimestamp: null
+        lastSubmissionTimestamp: null,
+        live: true,
+        surveyType: SurveyTypes.GENERAL,
       }
       try {
         const res = await firestore.collection('surveys').add({
@@ -50,4 +86,5 @@ export default compose(
       }
     },
   }),
+  withSurvey,
 )(DashboardPresenter);

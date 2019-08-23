@@ -8,6 +8,7 @@ import './CreateSurvey.css';
 
 const CreateSurveyPresenter = (props) => {
   const { 
+    view,
     surveyData,
     editSurveyTitle,
     addMultChoice,
@@ -93,7 +94,7 @@ const CreateSurveyPresenter = (props) => {
           disabled={disablePublish}
           onClick={() => onSubmit(surveyData)}
         >
-          Publish Survey
+          {view === ViewType.CREATE ? 'Publish Survey' : 'Update Survey'}
         </Button>
       </div>
     </div>

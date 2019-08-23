@@ -10,10 +10,18 @@ import { ViewType, QuestionTypes } from 'constants/survey';
 
 export default compose(
   setDisplayName('CreateSurveyPresenter'),
-  withStateHandlers(({ view }) => {
+  withProps(({ view, surveyInitialData }) => {
+    if (view === ViewType.EDIT && !!surveyInitialData) {
+      // console.log()
+      return { surveyData: { ...surveyInitialData} };
+    }
+  }),
+  withStateHandlers(({ view, surveyInitialData }) => {
     if (view === ViewType.EDIT) {
       // We're editing a survey, return surveyData from firestore
-      return { surveyData: {} };
+      return { 
+        surveyData: { ...surveyInitialData },
+      };
     } else if (view === ViewType.CREATE) {
       return {
         surveyData: {

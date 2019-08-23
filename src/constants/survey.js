@@ -1,3 +1,6 @@
+import React from 'react';
+import { formatTimestamp } from 'utilities/stringManipulation';
+
 export const QuestionTypes = Object.freeze({
   MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
   FREE_RESPONSE: 'FREE_RESPONSE',
@@ -38,3 +41,49 @@ export const SurveyFields = Object.freeze({
   NUM_SUBMISSIONS: 'Number of Submissions',
   QUESTIONS: 'Questions',
 });
+
+
+export const SurveyColumns = [
+  {
+    title: 'Survey Title',
+    dataIndex: 'surveyTitle',
+    key: 'surveyTitle',
+    width: 300,
+  },
+  {
+    title: 'Last Updated',
+    dataIndex: 'lastUpdatedTimestamp',
+    key: 'lastUpdatedTimestamp',
+    render: (timestamp) => (
+      <p>{formatTimestamp(timestamp)}</p>
+    ),
+    width: 250,
+  },
+  {
+    title: 'Entries',
+    dataIndex: 'numberOfSubmissions',
+    key: 'numberOfSubmissions',
+    width: 50,
+  },
+  {
+    title: 'Last Submission',
+    dataIndex: 'lastSubmissionTimestamp',
+    key: 'lastSubmissionTimestamp',
+    render: (timestamp) => {
+      if (!timestamp) return ;
+      else return <p>{formatTimestamp(timestamp, true)}</p>;
+    },
+    width: 150,
+  },
+  {
+    title: 'Action',
+    dataIndex: '',
+    key: 'x',
+    render: (p) => {
+      console.log("p in action: ", p);
+      return <p>aklsmd</p>
+    },
+    width: 150,
+  },
+];
+

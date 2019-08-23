@@ -4,3 +4,10 @@ html, body {
   /*background-color: #e6e1ea;*/
   font-family: 'Open Sans', sans-serif;
 }
+
+.spin-container {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
