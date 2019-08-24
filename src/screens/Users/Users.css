@@ -4,3 +4,38 @@
   min-height: 100vh;
   width: 100%;
 }
+
+.users-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.users-inner-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  /*flex: 1;*/
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+  -moz-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+  box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+}
+
+.add-user-card {
+  width: 600px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+  -moz-box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+  box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.13);
+}
+
+.create-user-input {
+  margin-bottom: 10px
+}

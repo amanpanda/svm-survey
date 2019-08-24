@@ -3,6 +3,7 @@ import {
   setDisplayName,
   withHandlers,
   withState,
+  withStateHandlers,
 } from 'recompose';
 import LogInPresenter from './LogInPresenter';
 import { Form } from 'antd';

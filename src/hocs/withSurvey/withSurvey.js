@@ -133,7 +133,9 @@ const withSurvey = isAssetScreen => WrappedComponent => (props) => {
       width: 200,
     },
   ];
-  columns = _.filter(columns, c => c.title != 'Last Updated');
+  if (isAssetScreen) {
+    columns = _.filter(columns, c => c.title != 'Last Updated');
+  }
 
   return (
     <div>
